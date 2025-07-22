@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap" rel="stylesheet">
   <style>
-    body { background: #fafafa; }
+    body { background: #FAFAFA; }
     #roi-calc-wrapper {
-      max-width: 600px; margin: 32px auto; padding: 24px 0;
+      max-width: 600px; margin: 32px auto; padding: 24px 0; background: #FAFAFA;
     }
     #roi-calc-card, #roi-calc-card * {
       font-family: 'DM Sans', sans-serif !important;
@@ -30,39 +30,61 @@
       margin-bottom: 10px;
       letter-spacing: -0.01em;
     }
-    .roi-calc-input-group {
+    .roi-calc-slider-group {
       margin-bottom: 22px;
     }
-    .roi-calc-input-row {
+    .roi-calc-slider-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-    .roi-calc-input {
-      width: 120px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid #eaeaea;
-      font-size: 1.13rem;
-      font-family: 'DM Sans', sans-serif;
-      text-align: right;
-      color: #3B3E3E;
+    .roi-calc-slider-value {
+      color: #E1B742;
       font-weight: 700;
-      background: #faf9f7;
+      font-size: 1.13rem;
+    }
+    .roi-calc-slider {
+      width: 100%;
+      margin: 0;
+      appearance: none;
+      height: 7px;
+      border-radius: 5px;
+      background: #EAEAEA;
       outline: none;
-      margin-left: 12px;
-      transition: border 0.18s;
+      transition: background 0.2s;
+      touch-action: pan-x;
+      margin-bottom: 3px;
     }
-    .roi-calc-input:focus {
-      border-color: #E1B742;
-      background: #fff;
+    .roi-calc-slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #3B3E3E;
+      border: 5px solid #fff;
+      box-shadow: 0 2px 10px rgba(44,48,54,0.07);
+      cursor: pointer;
+      transition: background 0.2s;
     }
-    .roi-calc-input-suffix {
-      color: #888;
-      margin-left: 6px;
-      font-size: 1rem;
+    .roi-calc-slider::-moz-range-thumb,
+    .roi-calc-slider::-ms-thumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #3B3E3E;
+      border: 5px solid #fff;
+      box-shadow: 0 2px 10px rgba(44,48,54,0.07);
+      cursor: pointer;
+    }
+    .roi-calc-slider-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0px;
+      color: #a3a3a3;
+      font-size: 0.97rem;
       font-weight: 400;
+      letter-spacing: 0;
     }
     .roi-calc-section-title {
       text-align: center;
@@ -107,7 +129,7 @@
       margin-bottom: 10px;
     }
     .roi-calc-roi-bar-bg {
-      background: #F6F5F0;
+      background: #FAFAFA;
       border-radius: 8px;
       height: 38px;
       display: flex;
@@ -195,8 +217,8 @@
       .roi-calc-result-box { padding: 14px 4px; min-width: 0; }
       .roi-calc-cta-box { padding: 15px 6px 14px 10px; }
       .roi-calc-cta-btn { padding: 12px 18px; font-size: 1.01rem; }
-      .roi-calc-input-row { flex-direction: row; }
-      .roi-calc-input { width: 80px; font-size: 1rem; }
+      .roi-calc-slider-row { flex-direction: row; }
+      .roi-calc-slider-value { font-size: 1.06rem; }
       .roi-calc-label { font-size: 0.97rem; }
       .roi-calc-section-title { font-size: 1rem; }
     }
@@ -206,28 +228,32 @@
   <div id="roi-calc-wrapper">
     <div id="roi-calc-card">
       <!-- Hourly Rate -->
-      <div class="roi-calc-input-group">
-        <div class="roi-calc-input-row">
+      <div class="roi-calc-slider-group">
+        <div class="roi-calc-slider-row">
           <label class="roi-calc-label" for="roi-hourly">Your average earnings per hour</label>
-          <input type="number" id="roi-hourly" class="roi-calc-input" min="15" max="500" value="100" step="1">
-          <span class="roi-calc-input-suffix">$</span>
+          <span id="roi-hourly-value" class="roi-calc-slider-value">$100</span>
+        </div>
+        <input type="range" id="roi-hourly" class="roi-calc-slider" min="15" max="500" value="100" step="5">
+        <div class="roi-calc-slider-labels">
+          <span>$15</span>
+          <span>$500</span>
         </div>
       </div>
       <!-- Hours Saved -->
-      <div class="roi-calc-input-group">
-        <div class="roi-calc-input-row">
+      <div class="roi-calc-slider-group">
+        <div class="roi-calc-slider-row">
           <label class="roi-calc-label" for="roi-hours">Hours saved per week using AI</label>
-          <input type="number" id="roi-hours" class="roi-calc-input" min="1" max="20" value="15" step="1">
-          <span class="roi-calc-input-suffix">hours</span>
+          <span id="roi-hours-value" class="roi-calc-slider-value">15 hours</span>
+        </div>
+        <input type="range" id="roi-hours" class="roi-calc-slider" min="1" max="20" value="15" step="1">
+        <div class="roi-calc-slider-labels">
+          <span>1 hour</span>
+          <span>20 hours</span>
         </div>
       </div>
       <!-- Results Section -->
       <div class="roi-calc-section-title">Your increase in earning potential</div>
       <div class="roi-calc-results">
-        <div class="roi-calc-result-box">
-          <div class="roi-calc-result-label">Weekly</div>
-          <div id="roi-weekly" class="roi-calc-result-value">$1,500</div>
-        </div>
         <div class="roi-calc-result-box">
           <div class="roi-calc-result-label">Monthly</div>
           <div id="roi-monthly" class="roi-calc-result-value">$6,000</div>
@@ -238,7 +264,7 @@
         </div>
       </div>
       <!-- ROI Bar -->
-      <div class="roi-calc-roi-label" style="margin-top:26px;">Your Return on Investment</div>
+      <div class="roi-calc-roi-label" style="margin-top:26px;">Your Return on Investment (1st year)</div>
       <div class="roi-calc-roi-bar-bg">
         <div id="roi-bar" class="roi-calc-roi-bar" style="width: 100%;">
           <span id="roi-bar-text" style="margin-right:-8px;">7823%</span>
@@ -256,9 +282,10 @@
   </div>
   <script>
     window.addEventListener('DOMContentLoaded', function() {
-      const hourlyInput = document.getElementById('roi-hourly');
-      const hoursInput = document.getElementById('roi-hours');
-      const weeklyEl = document.getElementById('roi-weekly');
+      const hourlySlider = document.getElementById('roi-hourly');
+      const hoursSlider = document.getElementById('roi-hours');
+      const hourlyValue = document.getElementById('roi-hourly-value');
+      const hoursValue = document.getElementById('roi-hours-value');
       const monthlyEl = document.getElementById('roi-monthly');
       const annualEl = document.getElementById('roi-annual');
       const roiBar = document.getElementById('roi-bar');
@@ -268,20 +295,16 @@
       function formatMoney(n) {
         return '$' + n.toLocaleString('en-US', {maximumFractionDigits: 0});
       }
-      function clamp(val, min, max) {
-        return Math.max(min, Math.min(max, val));
-      }
       function updateCalc() {
-        let rate = clamp(parseInt(hourlyInput.value || 0, 10), 15, 500);
-        let hrs = clamp(parseInt(hoursInput.value || 0, 10), 1, 20);
+        const rate = parseInt(hourlySlider.value, 10);
+        const hrs = parseInt(hoursSlider.value, 10);
+        hourlyValue.textContent = `$${rate}`;
+        hoursValue.textContent = `${hrs} hours`;
 
-        hourlyInput.value = rate;
-        hoursInput.value = hrs;
-
+        // No weekly value/output!
         const weekly = rate * hrs;
         const monthly = weekly * 4;
         const annual = weekly * 52;
-        weeklyEl.textContent = formatMoney(weekly);
         monthlyEl.textContent = formatMoney(monthly);
         annualEl.textContent = formatMoney(annual);
 
@@ -300,8 +323,8 @@
         }
       }
 
-      hourlyInput.addEventListener('input', updateCalc);
-      hoursInput.addEventListener('input', updateCalc);
+      hourlySlider.addEventListener('input', updateCalc);
+      hoursSlider.addEventListener('input', updateCalc);
 
       updateCalc();
     });
