@@ -36,14 +36,14 @@
     }
     #roi-calc-wrapper {
       max-width: 350px; 
-      margin: 0 auto 30px auto; 
+      margin: 0 auto 0 auto;   /* Bottom margin now 0 */
       padding: 0;
     }
     #roi-calc-card {
       background: #fff;
       border-radius: 17px;
       box-shadow: 0 4px 18px rgba(44,48,54,0.08);
-      padding: 20px 18px 16px 18px;
+      padding: 20px 18px 8px 18px;   /* Bottom padding now 8px */
       max-width: 100%;
     }
     .roi-calc-label {
@@ -179,7 +179,7 @@
     .roi-calc-roi-note {
       font-size: 0.94rem;
       color: #888;
-      margin-bottom: 13px;
+      margin-bottom: 7px;
       margin-left: 2px;
       text-align:center;
     }
@@ -198,19 +198,25 @@
       box-shadow: 0 2px 7px rgba(44,48,54,0.09);
       cursor: pointer;
       margin-top:7px;
+      margin-bottom: 0 !important;
       transition: opacity 0.18s;
       text-align:center;
     }
     .roi-calc-cta-btn:hover { opacity: 0.93; }
+    /* REMOVE SPACE BELOW ON MOBILE */
     @media (max-width: 600px) {
-      #roi-calc-wrapper { max-width: 97vw; }
+      #roi-calc-wrapper { max-width: 97vw; margin-bottom: 0 !important; }
       .roi-header h1 { font-size: 1.42rem; }
       .roi-header p { font-size: 1.00rem; }
-      #roi-calc-card { padding: 15px 4vw 16px 4vw; }
+      #roi-calc-card { padding: 15px 4vw 4px 4vw; }
       .roi-calc-result-box { min-width: 0; font-size:0.98rem; }
       .roi-calc-input { width: 70px; font-size:1rem; }
       .roi-calc-static-note { font-size:0.94rem; }
     }
+    /* Always remove extra margin below */
+    #roi-calc-wrapper { margin-bottom: 0 !important; }
+    #roi-calc-card .roi-calc-cta-btn { margin-bottom: 0 !important; }
+    body { margin-bottom: 0 !important; }
   </style>
 </head>
 <body>
