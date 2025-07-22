@@ -1,0 +1,337 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red255\green255\blue255;\red16\green60\blue192;
+}
+{\*\expandedcolortbl;;\cssrgb\c13333\c13333\c13333;\cssrgb\c100000\c100000\c100000;\cssrgb\c6667\c33333\c80000;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf2 \cb3 \expnd0\expndtw0\kerning0
+<!DOCTYPE html>\cb1 \
+\cb3 <html lang="en">\cb1 \
+\cb3 <head>\cb1 \
+\cb3 \'a0 <meta charset="UTF-8">\cb1 \
+\cb3 \'a0 <title>ROI Calculator</title>\cb1 \
+\cb3 \'a0 <meta name="viewport" content="width=600, maximum-scale=1.0, user-scalable=yes">\cb1 \
+\cb3 \'a0 <link rel="preconnect" href="{\field{\*\fldinst{HYPERLINK "https://fonts.googleapis.com/"}}{\fldrslt \cf4 \ul \ulc4 https://fonts.googleapis.com}}">\cb1 \
+\cb3 \'a0 <link rel="preconnect" href="{\field{\*\fldinst{HYPERLINK "https://fonts.gstatic.com/"}}{\fldrslt \cf4 \ul \ulc4 https://fonts.gstatic.com}}" crossorigin>\cb1 \
+\cb3 \'a0 <link href="{\field{\*\fldinst{HYPERLINK "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap"}}{\fldrslt \cf4 \ul \ulc4 https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap}}" rel="stylesheet">\cb1 \
+\cb3 \'a0 <style>\cb1 \
+\cb3 \'a0 \'a0 body \{ background: #f6f5f0; \}\cb1 \
+\cb3 \'a0 \'a0 #roi-calc-wrapper \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 max-width: 600px; margin: 32px auto; padding: 24px 0;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 #roi-calc-card, #roi-calc-card * \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-family: 'DM Sans', sans-serif !important;\cb1 \
+\cb3 \'a0 \'a0 \'a0 box-sizing: border-box;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 #roi-calc-card \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 background: #fff;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border-radius: 20px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 box-shadow: 0 8px 32px rgba(44,48,54,0.06);\cb1 \
+\cb3 \'a0 \'a0 \'a0 padding: 32px 28px 28px 28px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 max-width: 100%;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-label \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1.05rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #222;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 400;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 10px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 letter-spacing: -0.01em;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-slider-group \{ margin-bottom: 22px; \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-slider-row \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 display: flex;\cb1 \
+\cb3 \'a0 \'a0 \'a0 justify-content: space-between;\cb1 \
+\cb3 \'a0 \'a0 \'a0 align-items: center;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 6px;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-slider-value \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #E1B742;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 700;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1.13rem;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-slider \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 width: 100%;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin: 0;\cb1 \
+\cb3 \'a0 \'a0 \'a0 appearance: none;\cb1 \
+\cb3 \'a0 \'a0 \'a0 height: 7px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border-radius: 5px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 background: #EAEAEA;\cb1 \
+\cb3 \'a0 \'a0 \'a0 outline: none;\cb1 \
+\cb3 \'a0 \'a0 \'a0 transition: background 0.2s;\cb1 \
+\cb3 \'a0 \'a0 \'a0 touch-action: pan-x;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 3px;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-slider::-webkit-slider-thumb \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 appearance: none;\cb1 \
+\cb3 \'a0 \'a0 \'a0 width: 28px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 height: 28px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border-radius: 50%;\cb1 \
+\cb3 \'a0 \'a0 \'a0 background: #3B3E3E;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border: 5px solid #fff;\cb1 \
+\cb3 \'a0 \'a0 \'a0 box-shadow: 0 2px 10px rgba(44,48,54,0.07);\cb1 \
+\cb3 \'a0 \'a0 \'a0 cursor: pointer;\cb1 \
+\cb3 \'a0 \'a0 \'a0 transition: background 0.2s;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-slider::-moz-range-thumb,\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-slider::-ms-thumb \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 width: 28px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 height: 28px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border-radius: 50%;\cb1 \
+\cb3 \'a0 \'a0 \'a0 background: #3B3E3E;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border: 5px solid #fff;\cb1 \
+\cb3 \'a0 \'a0 \'a0 box-shadow: 0 2px 10px rgba(44,48,54,0.07);\cb1 \
+\cb3 \'a0 \'a0 \'a0 cursor: pointer;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-slider-labels \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 display: flex;\cb1 \
+\cb3 \'a0 \'a0 \'a0 justify-content: space-between;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-top: 0px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #a3a3a3;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 0.97rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 400;\cb1 \
+\cb3 \'a0 \'a0 \'a0 letter-spacing: 0;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-section-title \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 text-align: center;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin: 26px 0 12px 0;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 400;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1.09rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #232323;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-results \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 display: flex;\cb1 \
+\cb3 \'a0 \'a0 \'a0 gap: 16px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 justify-content: center;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 30px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 flex-wrap: wrap;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-result-box \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 flex: 1;\cb1 \
+\cb3 \'a0 \'a0 \'a0 min-width: 100px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 background: #fff;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border-radius: 14px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 box-shadow: 0 2px 10px rgba(44,48,54,0.06);\cb1 \
+\cb3 \'a0 \'a0 \'a0 padding: 18px 6px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 text-align: center;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin: 0 2px;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-result-label \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 0.98rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #6b6b6b;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 3px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 400;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-result-value \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #E1B742;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 700;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1.3rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 letter-spacing: -0.01em;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-roi-label \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 400;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #232323;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 10px;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-roi-bar-bg \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 background: #F6F5F0;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border-radius: 8px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 height: 38px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 display: flex;\cb1 \
+\cb3 \'a0 \'a0 \'a0 align-items: center;\cb1 \
+\cb3 \'a0 \'a0 \'a0 position: relative;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 8px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 overflow: hidden;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-roi-bar \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 background: #E1B742;\cb1 \
+\cb3 \'a0 \'a0 \'a0 height: 100%;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border-radius: 8px 0 0 8px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 display: flex;\cb1 \
+\cb3 \'a0 \'a0 \'a0 align-items: center;\cb1 \
+\cb3 \'a0 \'a0 \'a0 justify-content: flex-end;\cb1 \
+\cb3 \'a0 \'a0 \'a0 padding-right: 22px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1.1rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 700;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #222;\cb1 \
+\cb3 \'a0 \'a0 \'a0 min-width: 60px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 transition: width 0.5s cubic-bezier(.7,.2,.19,.97);\cb1 \
+\cb3 \'a0 \'a0 \'a0 position: absolute;\cb1 \
+\cb3 \'a0 \'a0 \'a0 top: 0; left: 0; bottom: 0;\cb1 \
+\cb3 \'a0 \'a0 \'a0 z-index: 1;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-roi-bar-text \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 position: absolute;\cb1 \
+\cb3 \'a0 \'a0 \'a0 right: 16px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 top: 0;\cb1 \
+\cb3 \'a0 \'a0 \'a0 bottom: 0;\cb1 \
+\cb3 \'a0 \'a0 \'a0 display: flex;\cb1 \
+\cb3 \'a0 \'a0 \'a0 align-items: center;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1.13rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 700;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #222;\cb1 \
+\cb3 \'a0 \'a0 \'a0 z-index: 2;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-roi-note \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 0.98rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #888;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 22px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-left: 3px;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-cta-box \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 background: #FAFAFA;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border-radius: 14px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 box-shadow: 0 2px 10px rgba(44,48,54,0.03);\cb1 \
+\cb3 \'a0 \'a0 \'a0 padding: 22px 18px 18px 18px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-top: 12px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 3px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 text-align: left;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-cta-title \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1.08rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 600;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #232323;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 5px;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-cta-desc \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1.02rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #474747;\cb1 \
+\cb3 \'a0 \'a0 \'a0 margin-bottom: 20px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 line-height: 1.6;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 400;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-cta-btn \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 display: inline-block;\cb1 \
+\cb3 \'a0 \'a0 \'a0 padding: 13px 28px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 background: #E1B742;\cb1 \
+\cb3 \'a0 \'a0 \'a0 color: #fff;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border-radius: 8px;\cb1 \
+\cb3 \'a0 \'a0 \'a0 border: none;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-size: 1.09rem;\cb1 \
+\cb3 \'a0 \'a0 \'a0 font-weight: 600;\cb1 \
+\cb3 \'a0 \'a0 \'a0 text-decoration: none;\cb1 \
+\cb3 \'a0 \'a0 \'a0 letter-spacing: 0;\cb1 \
+\cb3 \'a0 \'a0 \'a0 box-shadow: 0 2px 10px rgba(44,48,54,0.09);\cb1 \
+\cb3 \'a0 \'a0 \'a0 cursor: pointer;\cb1 \
+\cb3 \'a0 \'a0 \'a0 transition: opacity 0.18s;\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 .roi-calc-cta-btn:hover \{ opacity: 0.92; \}\cb1 \
+\cb3 \'a0 \'a0 @media (max-width: 700px) \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 #roi-calc-card \{ padding: 18px 3vw 22px 3vw; \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 .roi-calc-results \{ flex-direction: column; gap: 10px; \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 .roi-calc-result-box \{ padding: 14px 4px; min-width: 0; \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 .roi-calc-cta-box \{ padding: 15px 6px 14px 10px; \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 .roi-calc-cta-btn \{ padding: 12px 18px; font-size: 1.01rem; \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 .roi-calc-slider-row \{ flex-direction: row; \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 .roi-calc-slider-value \{ font-size: 1.06rem; \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 .roi-calc-label \{ font-size: 0.97rem; \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 .roi-calc-section-title \{ font-size: 1rem; \}\cb1 \
+\cb3 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 </style>\cb1 \
+\cb3 \'a0 <div id="roi-calc-card">\cb1 \
+\cb3 \'a0 \'a0 <div class="roi-calc-slider-group">\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div class="roi-calc-slider-row">\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <label class="roi-calc-label" for="roi-hourly">Your average earnings per hour</label>\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <span id="roi-hourly-value" class="roi-calc-slider-value">$100</span>\cb1 \
+\cb3 \'a0 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 <input type="range" id="roi-hourly" class="roi-calc-slider" min="15" max="500" value="100" step="5">\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div class="roi-calc-slider-labels">\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <span>$15</span>\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <span>$500</span>\cb1 \
+\cb3 \'a0 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 <div class="roi-calc-slider-group">\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div class="roi-calc-slider-row">\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <label class="roi-calc-label" for="roi-hours">Hours saved per week using AI</label>\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <span id="roi-hours-value" class="roi-calc-slider-value">15 hours</span>\cb1 \
+\cb3 \'a0 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 <input type="range" id="roi-hours" class="roi-calc-slider" min="1" max="20" value="15" step="1">\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div class="roi-calc-slider-labels">\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <span>1 hour</span>\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <span>20 hours</span>\cb1 \
+\cb3 \'a0 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 <div class="roi-calc-section-title">Your increase in earning potential</div>\cb1 \
+\cb3 \'a0 \'a0 <div class="roi-calc-results">\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div class="roi-calc-result-box">\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <div class="roi-calc-result-label">Weekly</div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <div id="roi-weekly" class="roi-calc-result-value">$1,500</div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div class="roi-calc-result-box">\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <div class="roi-calc-result-label">Monthly</div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <div id="roi-monthly" class="roi-calc-result-value">$6,000</div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div class="roi-calc-result-box">\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <div class="roi-calc-result-label">Annual</div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <div id="roi-annual" class="roi-calc-result-value">$78,000</div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 <div class="roi-calc-roi-label" style="margin-top:26px;">Your Return on Investment</div>\cb1 \
+\cb3 \'a0 \'a0 <div class="roi-calc-roi-bar-bg">\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div id="roi-bar" class="roi-calc-roi-bar" style="width: 100%;">\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 <span id="roi-bar-text" style="margin-right:-8px;">7823%</span>\cb1 \
+\cb3 \'a0 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 <span class="roi-calc-roi-bar-text" id="roi-bar-text-abs"></span>\cb1 \
+\cb3 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 \'a0 <div class="roi-calc-roi-note">Based on a training investment of $997</div>\cb1 \
+\cb3 \'a0 \'a0 <div class="roi-calc-cta-box">\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div class="roi-calc-cta-title">Ready to boost your productivity?</div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 <div class="roi-calc-cta-desc">Our AI productivity training will help you save valuable time and increase your efficiency.</div>\cb1 \
+\cb3 \'a0 \'a0 \'a0 <a href="{\field{\*\fldinst{HYPERLINK "https://calendly.com/njranaweera83/30min"}}{\fldrslt \cf4 \ul \ulc4 https://calendly.com/njranaweera83/30min}}" target="_blank" class="roi-calc-cta-btn">Get Started Today</a>\cb1 \
+\cb3 \'a0 \'a0 </div>\cb1 \
+\cb3 \'a0 </div>\cb1 \
+\cb3 \'a0 <script>\cb1 \
+\cb3 \'a0 \'a0 window.addEventListener('load', function() \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 const hourlySlider = document.getElementById('roi-hourly');\cb1 \
+\cb3 \'a0 \'a0 \'a0 const hoursSlider = document.getElementById('roi-hours');\cb1 \
+\cb3 \'a0 \'a0 \'a0 const hourlyValue = document.getElementById('roi-hourly-value');\cb1 \
+\cb3 \'a0 \'a0 \'a0 const hoursValue = document.getElementById('roi-hours-value');\cb1 \
+\cb3 \'a0 \'a0 \'a0 const weeklyEl = document.getElementById('roi-weekly');\cb1 \
+\cb3 \'a0 \'a0 \'a0 const monthlyEl = document.getElementById('roi-monthly');\cb1 \
+\cb3 \'a0 \'a0 \'a0 const annualEl = document.getElementById('roi-annual');\cb1 \
+\cb3 \'a0 \'a0 \'a0 const roiBar = document.getElementById('roi-bar');\cb1 \
+\cb3 \'a0 \'a0 \'a0 const roiBarText = document.getElementById('roi-bar-text');\cb1 \
+\cb3 \'a0 \'a0 \'a0 const roiBarTextAbs = document.getElementById('roi-bar-text-abs');\cb1 \
+\
+\cb3 \'a0 \'a0 \'a0 function formatMoney(n) \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 return '$' + n.toLocaleString('en-US', \{maximumFractionDigits: 0\});\cb1 \
+\cb3 \'a0 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 function updateCalc() \{\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 const rate = parseInt(hourlySlider.value, 10);\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 const hrs = parseInt(hoursSlider.value, 10);\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 hourlyValue.textContent = `$$\{rate\}`;\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 hoursValue.textContent = `$\{hrs\} hours`;\cb1 \
+\
+\cb3 \'a0 \'a0 \'a0 \'a0 const weekly = rate * hrs;\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 const monthly = weekly * 4;\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 const annual = weekly * 52;\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 weeklyEl.textContent = formatMoney(weekly);\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 monthlyEl.textContent = formatMoney(monthly);\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 annualEl.textContent = formatMoney(annual);\cb1 \
+\
+\cb3 \'a0 \'a0 \'a0 \'a0 const roi = (annual / 997) * 100;\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 const roiPct = Math.round(roi);\cb1 \
+\
+\cb3 \'a0 \'a0 \'a0 \'a0 let barWidth = Math.min(roi / 100, 1) * 100;\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 roiBar.style.width = barWidth + '%';\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 if(barWidth > 15)\{\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 \'a0 roiBarText.style.display = '';\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 \'a0 roiBarText.textContent = roiPct + '%';\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 \'a0 roiBarTextAbs.textContent = '';\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 \}else\{\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 \'a0 roiBarText.style.display = 'none';\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 \'a0 roiBarTextAbs.textContent = roiPct + '%';\cb1 \
+\cb3 \'a0 \'a0 \'a0 \'a0 \}\cb1 \
+\cb3 \'a0 \'a0 \'a0 \}\cb1 \
+\
+\cb3 \'a0 \'a0 \'a0 hourlySlider.addEventListener('input', updateCalc);\cb1 \
+\cb3 \'a0 \'a0 \'a0 hoursSlider.addEventListener('input', updateCalc);\cb1 \
+\
+\cb3 \'a0 \'a0 \'a0 updateCalc();\cb1 \
+\cb3 \'a0 \'a0 \});\cb1 \
+\cb3 \'a0 </script>\cb1 \
+\cb3 </div>}
