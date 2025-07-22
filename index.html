@@ -36,15 +36,16 @@
     }
     #roi-calc-wrapper {
       max-width: 350px; 
-      margin: 0 auto 0 auto;   /* Bottom margin now 0 */
+      margin: 0 auto 0 auto;
       padding: 0;
     }
     #roi-calc-card {
       background: #fff;
       border-radius: 17px;
       box-shadow: 0 4px 18px rgba(44,48,54,0.08);
-      padding: 20px 18px 8px 18px;   /* Bottom padding now 8px */
+      padding: 20px 18px 40px 18px;  /* Larger bottom padding for space */
       max-width: 100%;
+      text-align: center;
     }
     .roi-calc-label {
       font-size: 1.05rem;
@@ -53,12 +54,15 @@
       margin-bottom: 8px;
       letter-spacing: -0.01em;
       margin-top:4px;
+      text-align: center;
     }
     .roi-calc-input-row {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
       margin-bottom: 3px;
+      text-align: center;
     }
     .roi-calc-input {
       width: 100px;
@@ -85,7 +89,7 @@
       font-weight: 400;
     }
     .roi-calc-static-note {
-      text-align: left;
+      text-align: center;
       font-size: 0.97rem;
       color: #444;
       background: #f6f5f0;
@@ -106,6 +110,7 @@
       justify-content: center;
       margin-bottom: 16px;
       flex-wrap: wrap;
+      text-align: center;
     }
     .roi-calc-result-box {
       flex: 1;
@@ -123,12 +128,14 @@
       color: #6b6b6b;
       margin-bottom: 2px;
       font-weight: 400;
+      text-align: center;
     }
     .roi-calc-result-value {
       color: #E1B742;
       font-weight: 700;
       font-size: 1.19rem;
       letter-spacing: -0.01em;
+      text-align: center;
     }
     .roi-calc-roi-label {
       font-size: 0.99rem;
@@ -136,6 +143,7 @@
       color: #232323;
       margin-bottom: 7px;
       margin-top:4px;
+      text-align: center;
     }
     .roi-calc-roi-bar-bg {
       background: #FAFAFA;
@@ -146,6 +154,7 @@
       position: relative;
       margin-bottom: 7px;
       overflow: hidden;
+      text-align: center;
     }
     .roi-calc-roi-bar {
       background: #E1B742;
@@ -175,11 +184,12 @@
       font-weight: 700;
       color: #222;
       z-index: 2;
+      text-align: center;
     }
     .roi-calc-roi-note {
       font-size: 0.94rem;
       color: #888;
-      margin-bottom: 7px;
+      margin-bottom: 13px;
       margin-left: 2px;
       text-align:center;
     }
@@ -203,17 +213,15 @@
       text-align:center;
     }
     .roi-calc-cta-btn:hover { opacity: 0.93; }
-    /* REMOVE SPACE BELOW ON MOBILE */
     @media (max-width: 600px) {
       #roi-calc-wrapper { max-width: 97vw; margin-bottom: 0 !important; }
       .roi-header h1 { font-size: 1.42rem; }
       .roi-header p { font-size: 1.00rem; }
-      #roi-calc-card { padding: 15px 4vw 4px 4vw; }
+      #roi-calc-card { padding: 15px 4vw 30px 4vw; }
       .roi-calc-result-box { min-width: 0; font-size:0.98rem; }
       .roi-calc-input { width: 70px; font-size:1rem; }
       .roi-calc-static-note { font-size:0.94rem; }
     }
-    /* Always remove extra margin below */
     #roi-calc-wrapper { margin-bottom: 0 !important; }
     #roi-calc-card .roi-calc-cta-btn { margin-bottom: 0 !important; }
     body { margin-bottom: 0 !important; }
@@ -227,17 +235,19 @@
   <div id="roi-calc-wrapper">
     <div id="roi-calc-card">
       <!-- Hourly Rate -->
-      <div class="roi-calc-label">Your average earnings per hour</div>
+      <div class="roi-calc-label">Enter your average earnings per hour below</div>
       <div class="roi-calc-input-row">
         <input 
           type="number"
           id="roi-hourly"
           class="roi-calc-input"
-          min="15"
-          max="500"
+          min="0"
+          max="9999"
           value="100"
           step="1"
           aria-label="Hourly earnings"
+          inputmode="numeric"
+          autocomplete="off"
         >
         <span class="roi-calc-input-suffix">$/hour</span>
       </div>
@@ -281,14 +291,26 @@
       function formatMoney(n) {
         return '$' + n.toLocaleString('en-US', {maximumFractionDigits: 0});
       }
-      function clamp(val, min, max) {
-        return Math.max(min, Math.min(max, val));
-      }
       function updateCalc() {
-        let rate = clamp(parseInt(hourlyInput.value || 0, 10), 15, 500);
+        let rate = parseInt(hourlyInput.value, 10);
+        if (isNaN(rate) || rate < 0) rate = '';
+        // Allow blank for input, but restrict to 0-9999 for output
         hourlyInput.value = rate;
 
-        const hrs = 15; // Static as per your new spec!
+        // If empty, blank results
+        if (rate === '' || isNaN(rate)) {
+          monthlyEl.textContent = '$0';
+          annualEl.textContent = '$0';
+          roiBarText.textContent = '0%';
+          roiBar.style.width = '2%';
+          roiBarTextAbs.textContent = '';
+          return;
+        }
+
+        // Clamp to max for calculations
+        rate = Math.min(Math.max(rate, 0), 9999);
+
+        const hrs = 15; // Static per your spec
         const weekly = rate * hrs;
         const monthly = weekly * 4;
         const annual = weekly * 52;
@@ -318,6 +340,7 @@
   </script>
 </body>
 </html>
+
 
 
 
