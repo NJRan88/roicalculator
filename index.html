@@ -3,139 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <title>ROI Calculator</title>
-  <meta name="viewport" content="width=600, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=430, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body { background: #FAFAFA; }
-    #roi-calc-wrapper {
-      max-width: 600px; margin: 32px auto; padding: 24px 0; background: #FAFAFA;
+    body { background: #FAFAFA; margin:0; }
+    .roi-header {
+      text-align:center; margin-top:32px; margin-bottom:20px;
+    }
+    .roi-header h1 {
+      font-size:2.2rem;
+      font-weight:700;
+      font-family:'DM Sans',sans-serif;
+      letter-spacing:-0.03em;
+      color:#111;
+      margin-bottom:0.08em;
+      line-height:1.07;
+    }
+    .roi-header span { color:#E1B742; }
+    .roi-header p {
+      font-size:1.1rem;
+      font-family:'DM Sans',sans-serif;
+      margin-top:-0.35em;
+      margin-bottom:0;
+      color:#222;
+      line-height:1.15;
     }
     #roi-calc-card, #roi-calc-card * {
       font-family: 'DM Sans', sans-serif !important;
       box-sizing: border-box;
     }
+    #roi-calc-wrapper {
+      max-width: 350px; 
+      margin: 0 auto 30px auto; 
+      padding: 0;
+    }
     #roi-calc-card {
       background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(44,48,54,0.06);
-      padding: 32px 28px 28px 28px;
+      border-radius: 17px;
+      box-shadow: 0 4px 18px rgba(44,48,54,0.08);
+      padding: 20px 18px 16px 18px;
       max-width: 100%;
     }
     .roi-calc-label {
       font-size: 1.05rem;
       color: #222;
       font-weight: 400;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       letter-spacing: -0.01em;
+      margin-top:4px;
     }
-    .roi-calc-slider-group {
-      margin-bottom: 22px;
-    }
-    .roi-calc-slider-row {
+    .roi-calc-input-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
-    }
-    .roi-calc-slider-value {
-      color: #E1B742;
-      font-weight: 700;
-      font-size: 1.13rem;
-    }
-    .roi-calc-slider {
-      width: 100%;
-      margin: 0;
-      appearance: none;
-      height: 7px;
-      border-radius: 5px;
-      background: #EAEAEA;
-      outline: none;
-      transition: background 0.2s;
-      touch-action: pan-x;
+      gap: 10px;
       margin-bottom: 3px;
     }
-    .roi-calc-slider::-webkit-slider-thumb {
-      appearance: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #3B3E3E;
-      border: 5px solid #fff;
-      box-shadow: 0 2px 10px rgba(44,48,54,0.07);
-      cursor: pointer;
-      transition: background 0.2s;
+    .roi-calc-input {
+      width: 100px;
+      padding: 6px 10px;
+      border-radius: 7px;
+      border: 1px solid #eaeaea;
+      font-size: 1.08rem;
+      text-align: right;
+      color: #3B3E3E;
+      font-weight: 600;
+      background: #FAFAFA;
+      outline: none;
+      margin-left: 8px;
+      transition: border 0.18s;
     }
-    .roi-calc-slider::-moz-range-thumb,
-    .roi-calc-slider::-ms-thumb {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #3B3E3E;
-      border: 5px solid #fff;
-      box-shadow: 0 2px 10px rgba(44,48,54,0.07);
-      cursor: pointer;
+    .roi-calc-input:focus {
+      border-color: #E1B742;
+      background: #fff;
     }
-    .roi-calc-slider-labels {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 0px;
-      color: #a3a3a3;
-      font-size: 0.97rem;
+    .roi-calc-input-suffix {
+      color: #888;
+      margin-left: 4px;
+      font-size: 1rem;
       font-weight: 400;
-      letter-spacing: 0;
+    }
+    .roi-calc-static-note {
+      text-align: left;
+      font-size: 0.97rem;
+      color: #444;
+      background: #f6f5f0;
+      border-radius: 8px;
+      padding: 7px 10px;
+      margin: 11px 0 16px 0;
     }
     .roi-calc-section-title {
       text-align: center;
-      margin: 26px 0 12px 0;
+      margin: 10px 0 10px 0;
       font-weight: 400;
-      font-size: 1.09rem;
+      font-size: 1.02rem;
       color: #232323;
     }
     .roi-calc-results {
       display: flex;
-      gap: 16px;
+      gap: 10px;
       justify-content: center;
-      margin-bottom: 30px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
     .roi-calc-result-box {
       flex: 1;
-      min-width: 100px;
+      min-width: 120px;
       background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(44,48,54,0.06);
-      padding: 18px 6px;
+      border-radius: 11px;
+      box-shadow: 0 1px 6px rgba(44,48,54,0.04);
+      padding: 13px 4px 10px 4px;
       text-align: center;
       margin: 0 2px;
+      border:1px solid #f3f2ed;
     }
     .roi-calc-result-label {
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       color: #6b6b6b;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
       font-weight: 400;
     }
     .roi-calc-result-value {
       color: #E1B742;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.19rem;
       letter-spacing: -0.01em;
     }
     .roi-calc-roi-label {
-      font-size: 1rem;
+      font-size: 0.99rem;
       font-weight: 400;
       color: #232323;
-      margin-bottom: 10px;
+      margin-bottom: 7px;
+      margin-top:4px;
     }
     .roi-calc-roi-bar-bg {
       background: #FAFAFA;
       border-radius: 8px;
-      height: 38px;
+      height: 30px;
       display: flex;
       align-items: center;
       position: relative;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
       overflow: hidden;
     }
     .roi-calc-roi-bar {
@@ -145,11 +154,11 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding-right: 22px;
-      font-size: 1.1rem;
+      padding-right: 14px;
+      font-size: 1.01rem;
       font-weight: 700;
       color: #222;
-      min-width: 60px;
+      min-width: 40px;
       transition: width 0.5s cubic-bezier(.7,.2,.19,.97);
       position: absolute;
       top: 0; left: 0; bottom: 0;
@@ -157,99 +166,77 @@
     }
     .roi-calc-roi-bar-text {
       position: absolute;
-      right: 16px;
+      right: 12px;
       top: 0;
       bottom: 0;
       display: flex;
       align-items: center;
-      font-size: 1.13rem;
+      font-size: 1.09rem;
       font-weight: 700;
       color: #222;
       z-index: 2;
     }
     .roi-calc-roi-note {
-      font-size: 0.98rem;
+      font-size: 0.94rem;
       color: #888;
-      margin-bottom: 22px;
-      margin-left: 3px;
-    }
-    .roi-calc-cta-box {
-      background: #FAFAFA;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(44,48,54,0.03);
-      padding: 22px 18px 18px 18px;
-      margin-top: 12px;
-      margin-bottom: 3px;
-      text-align: left;
-    }
-    .roi-calc-cta-title {
-      font-size: 1.08rem;
-      font-weight: 600;
-      color: #232323;
-      margin-bottom: 5px;
-    }
-    .roi-calc-cta-desc {
-      font-size: 1.02rem;
-      color: #474747;
-      margin-bottom: 20px;
-      line-height: 1.6;
-      font-weight: 400;
+      margin-bottom: 13px;
+      margin-left: 2px;
+      text-align:center;
     }
     .roi-calc-cta-btn {
-      display: inline-block;
-      padding: 13px 28px;
+      display: block;
+      width: 100%;
+      padding: 12px 0;
       background: #E1B742;
       color: #fff;
       border-radius: 8px;
       border: none;
-      font-size: 1.09rem;
-      font-weight: 600;
+      font-size: 1.05rem;
+      font-weight: 700;
       text-decoration: none;
       letter-spacing: 0;
-      box-shadow: 0 2px 10px rgba(44,48,54,0.09);
+      box-shadow: 0 2px 7px rgba(44,48,54,0.09);
       cursor: pointer;
+      margin-top:7px;
       transition: opacity 0.18s;
+      text-align:center;
     }
-    .roi-calc-cta-btn:hover { opacity: 0.92; }
-    @media (max-width: 700px) {
-      #roi-calc-card { padding: 18px 3vw 22px 3vw; }
-      .roi-calc-results { flex-direction: column; gap: 10px; }
-      .roi-calc-result-box { padding: 14px 4px; min-width: 0; }
-      .roi-calc-cta-box { padding: 15px 6px 14px 10px; }
-      .roi-calc-cta-btn { padding: 12px 18px; font-size: 1.01rem; }
-      .roi-calc-slider-row { flex-direction: row; }
-      .roi-calc-slider-value { font-size: 1.06rem; }
-      .roi-calc-label { font-size: 0.97rem; }
-      .roi-calc-section-title { font-size: 1rem; }
+    .roi-calc-cta-btn:hover { opacity: 0.93; }
+    @media (max-width: 600px) {
+      #roi-calc-wrapper { max-width: 97vw; }
+      .roi-header h1 { font-size: 1.42rem; }
+      .roi-header p { font-size: 1.00rem; }
+      #roi-calc-card { padding: 15px 4vw 16px 4vw; }
+      .roi-calc-result-box { min-width: 0; font-size:0.98rem; }
+      .roi-calc-input { width: 70px; font-size:1rem; }
+      .roi-calc-static-note { font-size:0.94rem; }
     }
   </style>
 </head>
 <body>
+  <div class="roi-header">
+    <h1>Calculate Your <span>Personal ROI</span></h1>
+    <p>see how much more you'll earn with AI</p>
+  </div>
   <div id="roi-calc-wrapper">
     <div id="roi-calc-card">
       <!-- Hourly Rate -->
-      <div class="roi-calc-slider-group">
-        <div class="roi-calc-slider-row">
-          <label class="roi-calc-label" for="roi-hourly">Your average earnings per hour</label>
-          <span id="roi-hourly-value" class="roi-calc-slider-value">$100</span>
-        </div>
-        <input type="range" id="roi-hourly" class="roi-calc-slider" min="15" max="500" value="100" step="5">
-        <div class="roi-calc-slider-labels">
-          <span>$15</span>
-          <span>$500</span>
-        </div>
+      <div class="roi-calc-label">Your average earnings per hour</div>
+      <div class="roi-calc-input-row">
+        <input 
+          type="number"
+          id="roi-hourly"
+          class="roi-calc-input"
+          min="15"
+          max="500"
+          value="100"
+          step="1"
+          aria-label="Hourly earnings"
+        >
+        <span class="roi-calc-input-suffix">$/hour</span>
       </div>
-      <!-- Hours Saved -->
-      <div class="roi-calc-slider-group">
-        <div class="roi-calc-slider-row">
-          <label class="roi-calc-label" for="roi-hours">Hours saved per week using AI</label>
-          <span id="roi-hours-value" class="roi-calc-slider-value">15 hours</span>
-        </div>
-        <input type="range" id="roi-hours" class="roi-calc-slider" min="1" max="20" value="15" step="1">
-        <div class="roi-calc-slider-labels">
-          <span>1 hour</span>
-          <span>20 hours</span>
-        </div>
+      <div class="roi-calc-static-note">
+        <span style="font-weight:500; color:#B4972B;">Most students save 15 hours per week by using AI</span>
       </div>
       <!-- Results Section -->
       <div class="roi-calc-section-title">Your increase in earning potential</div>
@@ -264,28 +251,21 @@
         </div>
       </div>
       <!-- ROI Bar -->
-      <div class="roi-calc-roi-label" style="margin-top:26px;">Your Return on Investment (1st year)</div>
+      <div class="roi-calc-roi-label">Your Return on Investment (1st year)</div>
       <div class="roi-calc-roi-bar-bg">
         <div id="roi-bar" class="roi-calc-roi-bar" style="width: 100%;">
-          <span id="roi-bar-text" style="margin-right:-8px;">7823%</span>
+          <span id="roi-bar-text" style="margin-right:-7px;">7823%</span>
         </div>
         <span class="roi-calc-roi-bar-text" id="roi-bar-text-abs"></span>
       </div>
       <div class="roi-calc-roi-note">Based on a training investment of $997</div>
       <!-- CTA -->
-      <div class="roi-calc-cta-box">
-        <div class="roi-calc-cta-title">Ready to boost your productivity?</div>
-        <div class="roi-calc-cta-desc">Our AI productivity training will help you save valuable time and increase your efficiency.</div>
-        <a href="https://calendly.com/njranaweera83/30min" target="_blank" class="roi-calc-cta-btn">Get Started Today</a>
-      </div>
+      <a href="https://calendly.com/njranaweera83/30min" target="_blank" class="roi-calc-cta-btn">Get Started Today</a>
     </div>
   </div>
   <script>
     window.addEventListener('DOMContentLoaded', function() {
-      const hourlySlider = document.getElementById('roi-hourly');
-      const hoursSlider = document.getElementById('roi-hours');
-      const hourlyValue = document.getElementById('roi-hourly-value');
-      const hoursValue = document.getElementById('roi-hours-value');
+      const hourlyInput = document.getElementById('roi-hourly');
       const monthlyEl = document.getElementById('roi-monthly');
       const annualEl = document.getElementById('roi-annual');
       const roiBar = document.getElementById('roi-bar');
@@ -295,13 +275,14 @@
       function formatMoney(n) {
         return '$' + n.toLocaleString('en-US', {maximumFractionDigits: 0});
       }
+      function clamp(val, min, max) {
+        return Math.max(min, Math.min(max, val));
+      }
       function updateCalc() {
-        const rate = parseInt(hourlySlider.value, 10);
-        const hrs = parseInt(hoursSlider.value, 10);
-        hourlyValue.textContent = `$${rate}`;
-        hoursValue.textContent = `${hrs} hours`;
+        let rate = clamp(parseInt(hourlyInput.value || 0, 10), 15, 500);
+        hourlyInput.value = rate;
 
-        // No weekly value/output!
+        const hrs = 15; // Static as per your new spec!
         const weekly = rate * hrs;
         const monthly = weekly * 4;
         const annual = weekly * 52;
@@ -323,13 +304,14 @@
         }
       }
 
-      hourlySlider.addEventListener('input', updateCalc);
-      hoursSlider.addEventListener('input', updateCalc);
+      hourlyInput.addEventListener('input', updateCalc);
+      hourlyInput.addEventListener('change', updateCalc);
 
       updateCalc();
     });
   </script>
 </body>
 </html>
+
 
 
