@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>ROI Calculator</title>
-  <meta name="viewport" content="width=430, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -30,22 +30,25 @@
       color:#222;
       line-height:1.15;
     }
+    #roi-calc-wrapper {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 0;
+    }
     #roi-calc-card, #roi-calc-card * {
       font-family: 'DM Sans', sans-serif !important;
       box-sizing: border-box;
-    }
-    #roi-calc-wrapper {
-      max-width: 350px; 
-      margin: 0 auto 0 auto;
-      padding: 0;
     }
     #roi-calc-card {
       background: #fff;
       border-radius: 17px;
       box-shadow: 0 4px 18px rgba(44,48,54,0.08);
       padding: 20px 18px 40px 18px;
+      width: 100%;
       max-width: 100%;
       text-align: center;
+      box-sizing: border-box;
     }
     .roi-calc-label {
       font-size: 1.05rem;
@@ -65,12 +68,12 @@
       text-align: center;
     }
     .roi-calc-input {
-      width: 140px; /* increased from 100px */
-      max-width: 70vw;
+      width: 160px;
+      max-width: 85vw;
       padding: 10px 14px;
       border-radius: 9px;
       border: 1px solid #eaeaea;
-      font-size: 1.20rem;
+      font-size: 1.25rem;
       text-align: right;
       color: #3B3E3E;
       font-weight: 600;
@@ -92,23 +95,25 @@
     }
     .roi-calc-static-note {
       text-align: center;
-      font-size: 0.97rem;
-      color: #444;
+      font-size: 1.07rem;
+      color: #B4972B;
       background: #f6f5f0;
       border-radius: 8px;
-      padding: 7px 10px;
-      margin: 11px 0 16px 0;
+      padding: 11px 10px 11px 10px;
+      margin: 15px 0 18px 0;
+      font-weight: 500;
+      line-height: 1.45;
     }
     .roi-calc-section-title {
       text-align: center;
-      margin: 10px 0 10px 0;
+      margin: 13px 0 12px 0;
       font-weight: 400;
-      font-size: 1.02rem;
+      font-size: 1.08rem;
       color: #232323;
     }
     .roi-calc-results {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       justify-content: center;
       margin-bottom: 16px;
       flex-wrap: wrap;
@@ -116,7 +121,7 @@
     }
     .roi-calc-result-box {
       flex: 1;
-      min-width: 120px;
+      min-width: 110px;
       background: #fff;
       border-radius: 11px;
       box-shadow: 0 1px 6px rgba(44,48,54,0.04);
@@ -126,7 +131,7 @@
       border:1px solid #f3f2ed;
     }
     .roi-calc-result-label {
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       color: #6b6b6b;
       margin-bottom: 2px;
       font-weight: 400;
@@ -135,22 +140,22 @@
     .roi-calc-result-value {
       color: #E1B742;
       font-weight: 700;
-      font-size: 1.19rem;
+      font-size: 1.27rem;
       letter-spacing: -0.01em;
       text-align: center;
     }
     .roi-calc-roi-label {
-      font-size: 0.99rem;
+      font-size: 1.01rem;
       font-weight: 400;
       color: #232323;
       margin-bottom: 7px;
-      margin-top:4px;
+      margin-top:8px;
       text-align: center;
     }
     .roi-calc-roi-bar-bg {
       background: #FAFAFA;
       border-radius: 8px;
-      height: 30px;
+      height: 38px;
       display: flex;
       align-items: center;
       position: relative;
@@ -166,7 +171,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.13rem;
+      font-size: 1.21rem;
       font-weight: 700;
       color: #222;
       width: 100%;
@@ -178,7 +183,7 @@
     .roi-calc-roi-bar-text-abs {
       width: 100%;
       text-align: center;
-      font-size: 1.13rem;
+      font-size: 1.14rem;
       font-weight: 700;
       color: #222;
       z-index: 2;
@@ -194,7 +199,7 @@
       color: #222;
     }
     .roi-calc-roi-note {
-      font-size: 0.94rem;
+      font-size: 1.01rem;
       color: #888;
       margin-bottom: 13px;
       margin-left: 2px;
@@ -203,31 +208,32 @@
     .roi-calc-cta-btn {
       display: block;
       width: 100%;
-      padding: 12px 0;
+      padding: 16px 0;
       background: #E1B742;
       color: #fff;
       border-radius: 8px;
       border: none;
-      font-size: 1.05rem;
+      font-size: 1.14rem;
       font-weight: 700;
       text-decoration: none;
       letter-spacing: 0;
       box-shadow: 0 2px 7px rgba(44,48,54,0.09);
       cursor: pointer;
-      margin-top:7px;
+      margin-top:14px;
       margin-bottom: 0 !important;
       transition: opacity 0.18s;
       text-align:center;
     }
     .roi-calc-cta-btn:hover { opacity: 0.93; }
+
     @media (max-width: 600px) {
-      #roi-calc-wrapper { max-width: 97vw; margin-bottom: 0 !important; }
+      #roi-calc-wrapper { max-width: 98vw; }
+      #roi-calc-card { padding: 12px 2vw 23px 2vw; }
+      .roi-calc-result-box { min-width: 0; font-size:0.98rem; }
+      .roi-calc-input { width: 92vw; min-width: 70px; max-width: 98vw; }
+      .roi-calc-static-note { font-size:1.00rem; }
       .roi-header h1 { font-size: 1.42rem; }
       .roi-header p { font-size: 1.00rem; }
-      #roi-calc-card { padding: 15px 4vw 30px 4vw; }
-      .roi-calc-result-box { min-width: 0; font-size:0.98rem; }
-      .roi-calc-input { width: 80vw; min-width: 70px; }
-      .roi-calc-static-note { font-size:0.94rem; }
     }
     #roi-calc-wrapper { margin-bottom: 0 !important; }
     #roi-calc-card .roi-calc-cta-btn { margin-bottom: 0 !important; }
@@ -259,7 +265,7 @@
         <span class="roi-calc-input-suffix">$/hour</span>
       </div>
       <div class="roi-calc-static-note">
-        <span style="font-weight:500; color:#B4972B;">Most students save 15 hours per week by using AI</span>
+        Most students save 15 hours per week by using AI
       </div>
       <!-- Results Section -->
       <div class="roi-calc-section-title">Your increase in earning potential</div>
@@ -344,8 +350,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
